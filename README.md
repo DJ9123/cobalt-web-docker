@@ -10,7 +10,7 @@ In a Docker Compose file:
 services:
   cobalt-web:
     build:
-      context: https://github.com/NotNite/cobalt-web-docker.git
+      context: https://github.com/DJ9123/cobalt-web-docker.git
       dockerfile: Dockerfile
       additional_contexts:
         cobalt-src: https://github.com/imputnet/cobalt.git
