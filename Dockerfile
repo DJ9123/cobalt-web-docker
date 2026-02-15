@@ -22,6 +22,14 @@ RUN mkdir -p .git/logs && \
     echo "0000000000000000000000000000000000000000" > .git/HEAD && \
     echo "ref: refs/heads/main" > .git/HEAD || true
 
+# Fix for SvelteKit
+RUN mkdir -p .git/logs && \
+    echo "ref: refs/heads/main" > .git/HEAD && \
+    echo "0000000000000000000000000000000000000000 refs/heads/main" > .git/logs/HEAD && \
+    printf "[core]\n\trepositoryformatversion = 0\n\tbare = false\n\tlogallrefupdates = true\n" > .git/config && \
+    printf "[remote \"origin\"]\n\turl = https://github.com/imputnet/cobalt.git\n\tfetch = +refs/heads/*:refs/remotes/origin/*\n" >> .git/config
+
+
 # don't need to install anything other than the web deps
 # (but we need the root folder for the workspace)
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
